@@ -1,0 +1,199 @@
+<html>
+	<script src="https://unpkg.com/@popperjs/core@2"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<script src="script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+	
+	<head>
+		<title>ReDive等級計算機</title>
+		<style>
+			.tooltip-inner {
+				max-width: 350px;
+				/* If max-width does not work, try using width instead */
+				width: 350px; 
+			}
+		</style>
+	</head>
+	
+	<body>
+		<nav class="navbar navbar-primary bg-primary">
+			<div class="container-fluid">
+				<span class="navbar-brand mb-0 h1 text-light" style="font-size: 2rem;">ReDive等級計算機</span>
+			</div>
+		</nav>
+		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-4 col-12 mt-3">
+					<div id="card-1" class="card">
+						<div class="card-header bg-primary text-light d-flex justify-content-between" style="font-size: 1.5rem;">
+							<span>任務</span>
+							<span id="display_mission_exp" class="ml-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="Tooltip on bottom"></span>
+						</div>
+						<div class="card-body" style="font-size: 1.25rem;">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">完成10次主線或活動冒險</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">完成20次主線或活動冒險</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">完成3次主線(V、VH)或活動冒險(V)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">抽10次一般轉蛋</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">購買1次瑪那</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">強化1次角色技能</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">使用裝備強化來提升裝備的一顆星</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">完成4次探索冒險</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">完成1次地下城的戰鬥</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">在戰鬥競技場戰鬥1次</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="mission_exp" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">在公主競技場戰鬥1次</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-4 col-12 mt-3">
+					<div id="card-2" class="card">
+						<div class="card-header bg-primary text-light d-flex justify-content-between" style="font-size: 1.5rem;">
+							<span>體力</span>
+							<span id="display_points" class="ml-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="Tooltip on bottom"></span>
+						</div>
+						<div class="card-body" style="font-size: 1.25rem;">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_mission" onclick="user_level_on_change()">
+								<label class="form-check-label" for="flexCheckDefault">每日任務體力(加倍時請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_dungeon_normal" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">地下城 Normal(已通關請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_dungeon_hard" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">地下城 Hard(已通關請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_dungeon_veryhard" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">地下城 Very Hard(已通關請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_dungeon_ex1" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">地下城 Exterme 1(已通關請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_dungeon_ex2" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">地下城 Exterme 2(已通關請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_dungeon_ex3" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">地下城 Exterme 3(已通關請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_dungeon_ex4" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">地下城 Exterme 4(已通關請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_dungeon_ex5" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">地下城 Exterme 5(已通關請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_dessert_desk" onclick="user_level_on_change()" checked>
+								<label class="form-check-label" for="flexCheckDefault">點心桌(已擁有請勾選)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="p_extra" onclick="user_level_on_change()">
+								<label class="form-check-label" for="flexCheckDefault">體力包(有購買請勾選)</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-4 col-12 mt-3">
+					<div id="card-3" class="card">
+						<div class="card-header bg-primary text-light" style="font-size: 1.5rem;">計算</div>
+						<div class="card-body" style="font-size: 1.25rem;">
+							<div class="form-floating mb-1">
+								<input type="number" class="form-control" id="user_level" value=120 min=1 max=300 onkeyup="enforceMinMax(this)" onchange="user_level_on_change();" style="font-size: 1.25rem;">
+								<label>當前等級(範圍: 1-300)</label>
+							</div>
+							
+							<div class="form-floating mb-1">
+								<input type="number" class="form-control" id="user_exp" value=0 min=0 max=4424 onkeyup="enforceMinMax(this)" onchange="user_level_on_change();" style="font-size: 1.25rem;">
+								<label>當前經驗(範圍: 0-4424)</label>
+							</div>
+							
+							<div class="form-floating mb-1">
+								<input type="number" class="form-control" id="target_level" value=0 min=0 max=300 onkeyup="enforceMinMax(this)" onchange="user_level_on_change();" style="font-size: 1.25rem;">
+								<label>目標等級(範圍: 0-300，欲計算至滿等請填0)</label>
+							</div>
+							
+							<div class="form-floating mb-1">
+								<input type="number" class="form-control" id="exp_bonus" value=1 min=1 max=10 onkeyup="enforceMinMax(this)" onchange="user_level_on_change();" style="font-size: 1.25rem;">
+								<label>經驗倍率(範圍: 1-10)</label>
+							</div>
+							
+							<div class="form-floating mb-1">
+								<input type="number" class="form-control" id="points_bottom" value=0 min=0 max=40 onkeyup="enforceMinMax(this)" onchange="user_level_on_change();calc_stone();" style="font-size: 1.25rem;">
+								<label>吃管回體(範圍: 0-40) <label id="stone"></label></label>
+							</div>
+							
+							<div class="text-center">
+								<p></p>
+								<p id="result" style="font-size: 1.5rem;"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-12 mt-3 mb-3">
+					<div id="card-detail" class="card">
+						<div class="card-header bg-primary text-light" style="font-size: 1.5rem;" data-bs-toggle="collapse" href="#target_collapse" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">詳細</div>
+						<div id="target_collapse" class="card-body collapse show" style="font-size: 1.25rem;">
+							<table class="table">
+								<thead style="font-size: 1.25rem;">
+									<tr>
+										<th class="text-center" scope="col">日期</th>
+										<th class="text-center" scope="col">等級(經驗條上限)</th>
+										<th class="text-center" scope="col">每日任務經驗</th>
+										<th class="text-center" scope="col">獲得體力(管數換算)<br>(含升級恢復)</th>
+										<th class="text-center" scope="col">體力轉換經驗<br>(獲得體力×經驗倍率)</th>
+										<th class="text-center" scope="col">經驗總和<br>(每日任務經驗+體力轉換經驗)</th>
+										<th class="text-center" scope="col">升等速度<br>(等級/日)</th>
+									</tr>
+								</thead>
+								<tbody id="tbody" style="font-size: 1.25rem;">
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
